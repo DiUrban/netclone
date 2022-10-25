@@ -1,0 +1,41 @@
+@import "../../app.scss";
+
+.list {
+  width: 100%;
+  margin-top: 10px;
+  .listTitle {
+    color: var(--main-text);
+    font-size: 20px;
+    font-weight: 500;
+    margin-left: 50px;
+  }
+  .wrapper {
+    position: relative;
+    .sliderArrow {
+      width: 50px;
+      height: 100%;
+      background-color: var(--main-see);
+      color: var(--main-text);
+      position: absolute;
+      z-index: 2;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      cursor: pointer;
+      &.left {
+        left: 0;
+      }
+      &.right {
+        right: 0;
+      }
+    }
+    .container {
+      display: flex;
+      margin-left: 50px;
+      width: max-content;
+      margin-top: 10px;
+      transform: translateX(0);
+      transition: all 800ms ease-in-out;
+    }
+  }
+}

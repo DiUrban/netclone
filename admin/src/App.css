@@ -1,0 +1,15 @@
+.container {
+    display: flex;
+    margin-top: 10px;
+}
+
+*,
+*::before,
+*::after {
+    -webkit-appearance: none;
+}
+
+.link {
+    text-decoration: none;
+    color: inherit;
+}
