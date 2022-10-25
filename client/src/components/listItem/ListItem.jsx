@@ -5,6 +5,7 @@ import axios from 'axios'
 import {Link} from 'react-router-dom'
 import { AuthContext } from '../../authContext/AuthContext'
 function ListItem({ index, item }) {
+  const axiosInstance =axios.create({baseURL:process.env.REACT_APP_API_URL})
   const user = useContext(AuthContext)
 
   const [isHovered, setIsHovered] = useState(false);
@@ -13,7 +14,7 @@ function ListItem({ index, item }) {
   useEffect(() => {
     const getMovie = async () => {
       try {
-        const res = await axios.get("/movies/find/" + item, {
+        const res = await axiosInstance.get("/movies/find/" + item, {
           headers: {
             token: `Bearer ${user.user.accessToken}`
           }

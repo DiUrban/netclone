@@ -5,9 +5,12 @@ import WidgetSm from "../../components/widgetSm/WidgetSm";
 import WidgetLg from "../../components/widgetLg/WidgetLg";
 import { useState,useMemo,useEffect } from "react";
 import axios from 'axios'
-
+import { useContext } from "react";
+import {AuthContext} from '../../context/authContext/AuthContext'
 
 export default function Home() {
+  const user=useContext(AuthContext)
+  const axiosInstance =axios.create({baseURL:process.env.REACT_APP_API_URL})
   const MONTHS = useMemo(() =>
   ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 ,[]);
@@ -15,9 +18,9 @@ const [userStats, setUserStats] = useState([]);
   useEffect(() => {
     const getStats = async () => {
       try {
-        const res = await axios.get("/users/stats", {
+        const res = await axiosInstance.get("/users/stats", {
           headers: {
-            token: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNDQ5M2IxZjczYWU4MWFiNDU1MDc0MCIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY2NTc4NjAwNCwiZXhwIjoxNjY1ODcyNDA0fQ.Hl1mvK-QfZezs81GaigLRXLMg-l4k8W5L9W2Y_XL4fA"
+            token: `Bearer ${user.user.accessToken}`
           },
         });
         const statsList = res.data.sort((a, b) => { return a._id - b._id });

@@ -4,13 +4,14 @@ import axios from 'axios'
 import React, { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../../authContext/AuthContext'
 
-function Featured({ type,setGenre }) {
+function Featured({ type, setGenre }) {
+    const axiosInstance =axios.create({baseURL:process.env.REACT_APP_API_URL})
     const user = useContext(AuthContext)
     const [content, setContent] = useState({});
     useEffect(() => {
         const getRandomContent = async () => {
             try {
-                const res = await axios.get(`/movies/random${type ? "?type=" + type : ""}`, {
+                const res = await axiosInstance.get(`/movies/random${type ? "?type=" + type : ""}`, {
                     headers:{token:`Bearer ${user.user.accessToken}`}
                   })
                 setContent(res.data[0])

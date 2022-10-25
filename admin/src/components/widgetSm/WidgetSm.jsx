@@ -3,11 +3,13 @@ import { Visibility } from "@material-ui/icons";
 import { useState,useEffect } from "react";
 import axios from 'axios'
 export default function WidgetSm() {
+  const axiosInstance =axios.create({baseURL:process.env.REACT_APP_API_URL})
+
   const [newUsers, setNewUsers] = useState([]);
   useEffect(() => {
     const getNewUsers = async () => {
       try {
-        const res = await axios.get("/users?new=true", {
+        const res = await axiosInstance.get("/users?new=true", {
           headers: {
             token: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNDQ5M2IxZjczYWU4MWFiNDU1MDc0MCIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY2NTc4NjAwNCwiZXhwIjoxNjY1ODcyNDA0fQ.Hl1mvK-QfZezs81GaigLRXLMg-l4k8W5L9W2Y_XL4fA"
           },

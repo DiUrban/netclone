@@ -8,11 +8,12 @@ import { AuthContext } from '../../authContext/AuthContext'
 const Home = ({ type }) => {
   const user = useContext(AuthContext)
   const [lists, setLists] = useState([]);
-  const [genre,setGenre]=useState(null)
+  const [genre, setGenre] = useState(null)
+  const axiosInstance =axios.create({baseURL:process.env.REACT_APP_API_URL})
   useEffect(() => {
     const getRandomLists = async () => {
       try {
-        const res = await axios.get(`lists${type ? "?type=" + type : ""}${genre ? "&genre=" + genre : ""}`, {
+        const res = await axiosInstance.get(`lists${type ? "?type=" + type : ""}${genre ? "&genre=" + genre : ""}`, {
           headers:{token:`Bearer ${user.user.accessToken}`}
         })
         setLists(res.data);
