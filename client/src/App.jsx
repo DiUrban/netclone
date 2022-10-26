@@ -18,8 +18,7 @@ const App = () => {
            {!user ?
         <>
           <Routes>
-            <Route path="/" element={<Navigate to="/register" />} />
-            <Route path="/register" element={<Register/>}/>
+            <Route path="/secret_register" element={<Register/>}/>
             <Route path="*" element={<Navigate to="/login" />} />
             <Route path="/login" element={<Login />}/>
           </Routes>
